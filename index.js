@@ -7,10 +7,12 @@ const mongoose = require('mongoose');
 dotenv.config();
 
 // Connect to DB
-mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true });
-
+mongoose.connect(process.env.DB_CONNECT_LOCAL, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => console.log('Connected'));
 mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+
+// Middleware
+app.use(express.json());
 
 // Import Routes
 const authRoute = require('./routes/auth');
