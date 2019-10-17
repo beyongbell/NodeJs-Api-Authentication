@@ -11,6 +11,7 @@
   "dependencies": {
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
+    "express-validator": "^6.2.0",
     "module-alias": "^2.2.2",
     "mongoose": "^5.7.5"
   },
@@ -18,7 +19,7 @@
     "nodemon": "^1.19.3"
   },
   "_moduleAliases": {
-    "@root" : ".",
+    "@root": ".",
     "@model": "models"
   }
 }

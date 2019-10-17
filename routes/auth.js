@@ -1,7 +1,20 @@
 const router = require('express').Router();
 const User   = require('@model/User');
+const { check, validationResult } = require('express-validator');
 
-router.post('/register', async (req, res) => {
+// Validation
+const validation = [
+	check('name')
+	.isString().withMessage('Is String')
+	.isLength({ min: 6 }).withMessage('must be at least 6 chars long'),
+	check('email').isLength({ min: 6 }).isEmail(),
+	check('password').isLength({ min: 6 })
+]
+
+router.post('/register', validation, async (req, res) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) return res.status(422).json({ errors: errors.array() });
+	// res.send(errors.errors[0].msg);
 	const user = new User({
 		name: req.body.name,
 		email: req.body.email,
